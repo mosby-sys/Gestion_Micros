@@ -22,6 +22,8 @@ public class viaje {
         this.chofer2 = chofer2;
     }
 
+
+
     public void asignarChofer(chofer chofer1, chofer chofer2) {
         this.chofer1 = chofer1;
         this.chofer2 = chofer2;
