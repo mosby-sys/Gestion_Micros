@@ -1,14 +1,21 @@
 package clases;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Viaje {
     private Float precio;
     private String inicio;
     private String destino;
-    private String idViaje;
+    private static String idViaje;
     public String horarioPartida;
     public String horarioLlegada;
     private Chofer chofer1;
     private Chofer chofer2;
+
 
     // Constructor
     public Viaje(Float precio, String inicio, String destino, String idViaje, String horarioPartida, String horarioLlegada, Chofer chofer1, Chofer chofer2) {
@@ -21,38 +28,44 @@ public class Viaje {
         this.chofer1 = chofer1;
         this.chofer2 = chofer2;
     }
+    public static List<Viaje> cargarViajes(String rutaArchivo, List<Chofer> choferes) throws IOException {
+        List<Viaje> viajes = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo));
 
-
-
-    public void asignarChofer(Chofer chofer1, Chofer chofer2) {
-        this.chofer1 = chofer1;
-        this.chofer2 = chofer2;
-
-    }
-
-    public void asignarMicro() {
-        // Aquí se podría implementar la lógica para asignar un micro al viaje
-
-    }
-
-    public void asignarAsiento(Pasaje pasaje, java.util.List<String> asientosReservados) {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
-
-        System.out.println("Asientos reservados: " + asientosReservados);
-        System.out.print("Ingrese el asiento que desea asignar: ");
-        String nuevoAsiento = scanner.nextLine();
-
-        if (asientosReservados.contains(nuevoAsiento)) {
-            System.out.println("El asiento ya está reservado. Por favor, elija otro.");
-        } else {
-            asientosReservados.add(nuevoAsiento);
-            pasaje.setAsiento(nuevoAsiento);
-            System.out.println("Asiento asignado exitosamente al pasaje.");
+        String linea;
+        while ((linea = reader.readLine()) != null) {
+            String[] datos = linea.split("\\|");
+            if (datos.length >= 8) { // Verifica que tenga todos los campos
+                Viaje viaje = new Viaje(
+                        Float.parseFloat(datos[3]),  // precio
+                        datos[1],                    // inicio
+                        datos[2],                    // destino
+                        datos[0],                    // idViaje
+                        datos[4],                    // horarioPartida
+                        datos[5],                    // horarioLlegada
+                        buscarChofer(choferes, datos[6]),  // chofer1
+                        buscarChofer(choferes, datos[7])   // chofer2
+                );
+                viajes.add(viaje);
+            }
         }
+        reader.close();
+        return viajes;
     }
+
+    private static Chofer buscarChofer(List<Chofer> choferes, String idChofer) {
+        for (Chofer chofer : choferes) {
+            if (chofer.getID().equals(idChofer)) {
+                return chofer;
+            }
+        }
+        System.out.println("Advertencia: Chofer con ID " + idChofer + " no encontrado");
+        return null;
+    }
+
 
     // GET para idViaje
-    public String getIdViaje() {
+    public static String getIdViaje() {
         return idViaje;
     }
     // SET para idViaje

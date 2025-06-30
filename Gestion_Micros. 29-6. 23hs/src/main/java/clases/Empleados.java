@@ -1,7 +1,7 @@
 package clases;
 
 public abstract class Empleados {
-    private String nombre;
+    private static String nombre;
     private String ID;
 
     public Empleados(String nombre, String ID) {
@@ -10,7 +10,7 @@ public abstract class Empleados {
     }
 
     // GET para nombre
-    public String getNombre() {
+    public static String getNombre() {
         return nombre;
     }
     // SET para nombre

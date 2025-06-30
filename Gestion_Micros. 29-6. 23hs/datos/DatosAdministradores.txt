@@ -1,0 +1,5 @@
+ADM-001|Carlos Mendoza
+ADM-002|Laura Fernández
+ADM-003|Roberto Juárez
+ADM-004|Sofía Ramírez
+ADM-005|Miguel Torres

@@ -1,0 +1,10 @@
+MEC-001|Luis Torres
+MEC-002|María García
+MEC-003|Javier López
+MEC-004|Ana Martínez
+MEC-005|Carlos Rojas
+MEC-006|Sofía Herrera
+MEC-007|Pedro Díaz
+MEC-008|Lucía Peña
+MEC-009|Miguel Soto
+MEC-010|Elena Castro

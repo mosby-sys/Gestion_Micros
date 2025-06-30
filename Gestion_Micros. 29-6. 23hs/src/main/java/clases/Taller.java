@@ -1,10 +1,36 @@
 package clases;
 
-import java.util.List;  // Asegúrate de importar List
+
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Taller {
     private int idTaller;
-    private List<Mecanicos> mecanicos;  // Correcto: atributo privado
+
+    public static void mostrarMenuTaller(Scanner scanner, Taller taller, List<Micros> micros, List<Mecanicos> mecanicos) {
+        int opcion;
+        do {
+            System.out.println("\n=== TALLER DE MANTENIMIENTO ===");
+            System.out.println("1. Generar orden de reparación");
+            System.out.println("2. Mostrar micros");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+
+            opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    generarOrdenReparacion(mecanicos, micros);
+                    break;
+                case 2:
+                    mostrarMicros(micros);
+            }
+        } while (opcion != 0);
+    }
+
+
 
     // Getters y Setters
     public int getIdTaller() {
@@ -15,32 +41,12 @@ public class Taller {
         this.idTaller = idTaller;
     }
 
-    public List<Mecanicos> getMecanicos() {
-        return mecanicos;
+
+    public static void  generarOrdenReparacion(List<Mecanicos> mecanicos,List<Micros> micros){
+
     }
 
-    public void setMecanicos(List<Mecanicos> mecanicos) {
-        this.mecanicos = mecanicos;
-    }
-
-    public void agregarMecanicos(Mecanicos mecanico) {
-        if (this.mecanicos != null) {
-            this.mecanicos.add(mecanico);
-        }
-    }
-    public void mostrarMecanicos() {
-        if (this.mecanicos != null && !this.mecanicos.isEmpty()) {
-            System.out.println("Lista de Mecánicos:");
-            for (Mecanicos mecanico : this.mecanicos) {
-                System.out.println("ID: " + mecanico.getIdMecanico() + ", Nombre: " + mecanico.getNombreMecanico());
-            }
-        } else {
-            System.out.println("No hay mecánicos registrados.");
-        }
-    }
-
-
-    public void mostrarMicros(List<Micros> micros) {
+    public static void mostrarMicros(List<Micros> micros) {
         if (micros != null && !micros.isEmpty()) {
             System.out.println("Lista de Micros:");
             for (Micros micro : micros) {

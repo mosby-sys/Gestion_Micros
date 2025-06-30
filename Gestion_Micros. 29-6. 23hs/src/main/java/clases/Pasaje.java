@@ -1,10 +1,63 @@
 package clases;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Pasaje extends Pasajero {
     private String idPasaje;
     private String asiento;
     private String horarioPartida;  // copiado desde viaje
     private String horarioLlegada;//copiado desde viaje
+
+    public Pasaje(String idPasaje, String dni, String nombre, String asiento, String idViaje) {
+        super();
+    }
+
+    public static List<Pasaje> cargarPasajes(String rutaArchivo, List<Pasajero> pasajeros, List<Viaje> viajes) throws IOException {
+        List<Pasaje> pasajes = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo));
+
+        String linea;
+        while ((linea = reader.readLine()) != null) {
+            String[] datos = linea.split("\\|");
+            Pasajero pasajero = buscarPasajero(pasajeros, datos[1]);
+            Viaje viaje = buscarViaje(viajes, datos[5]);
+
+            Pasaje pasaje = new Pasaje(
+                    datos[0], // idPasaje
+                    datos[2], // asiento
+                    pasajero.getIdPasajero(),
+                    pasajero.getNombrePasajero(),
+                    pasajero.getDireccionPasajero(),
+                    pasajero.getTelefonoPasajero()
+            );
+            pasaje.setHorarioPartida(viaje.getHorarioPartida());
+            pasaje.setHorarioLlegada(viaje.getHorarioLlegada());
+            pasajes.add(pasaje);
+        }
+        reader.close();
+        return pasajes;
+    }
+
+    private static Pasajero buscarPasajero(List<Pasajero> pasajeros, String id) {
+        for (Pasajero pasajero : pasajeros) {
+            if (pasajero.getIdPasajero().equals(id)) {
+                return pasajero;
+            }
+        }
+        return null;
+    }
+
+    private static Viaje buscarViaje(List<Viaje> viajes, String id) {
+        for (Viaje viaje : viajes) {
+            if (viaje.getIdViaje().equals(id)) {
+                return viaje;
+            }
+        }
+        return null;
+    }
 
 
     //herencia de pasajero
@@ -76,4 +129,7 @@ public class Pasaje extends Pasajero {
         // Implementación del setter
     }
 
+    public CharSequence getIdViaje() {
+        return null;
+    }
 }
