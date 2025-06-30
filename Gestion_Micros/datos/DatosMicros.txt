@@ -1,0 +1,10 @@
+MIC-001|En servicio|Disponible
+MIC-002|En mantenimiento|No disponible
+MIC-003|En servicio|Disponible
+MIC-004|En reparación|No disponible
+MIC-005|En servicio|Ocupado
+MIC-006|En servicio|Disponible
+MIC-007|En mantenimiento|No disponible
+MIC-008|En servicio|Ocupado
+MIC-009|En reparación|No disponible
+MIC-010|En servicio|Disponible

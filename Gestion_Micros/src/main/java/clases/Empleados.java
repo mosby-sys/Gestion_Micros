@@ -1,0 +1,28 @@
+package clases;
+
+public abstract class Empleados {
+    private static String nombre;
+    private String ID;
+
+    public Empleados(String nombre, String ID) {
+        this.nombre = nombre;
+        this.ID = ID;
+    }
+
+    // GET para nombre
+    public static String getNombre() {
+        return nombre;
+    }
+    // SET para nombre
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    // GET para ID
+    public String getID() {
+        return ID;
+    }
+    // SET para ID
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+}
